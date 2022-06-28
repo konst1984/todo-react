@@ -1,1 +1,1 @@
-# my todo projecy on react
+# my todo project on react
