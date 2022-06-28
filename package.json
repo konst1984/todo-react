@@ -54,11 +54,12 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.1.0",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "svgo": "^2.8.0"
   },
   "lint-staged": {
     "*.js": [

@@ -6,14 +6,13 @@
     "ignorePatterns": ["node_modules", "dist", "build"],
     "extends": [
       "eslint:recommended",
-      "airbnb",
       "plugin:react/recommended",
       "plugin:prettier/recommended",
       "plugin:import/errors",
       "plugin:import/warnings",
+      "plugin:react/jsx-runtime",
       "prettier"
     ],
-    "react/static-property-placement": ["error", "static public field"],
     "parser": "@babel/eslint-parser",
     "parserOptions": {
       "ecmaFeatures": {
@@ -50,7 +49,8 @@
           ],
           "newlines-between": "always"
         }
-      ]
+      ],
+      "react/static-property-placement": ["error", "static public field"]
     },
     "settings": {
       "import/resolver": {
