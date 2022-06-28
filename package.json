@@ -20,7 +20,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "format": "prettier --write src"
+    "format": "prettier --write src",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "browserslist": {
     "production": [
@@ -50,6 +52,17 @@
     "eslint-plugin-prettier": "^4.1.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "2.7.1"
+  },
+  "lint-staged" : {
+    "*.js": [
+      "npm run lint",
+      "npm run lint:fix",
+      "npn run format",
+      "git add"
+    ]
+
   }
 }
