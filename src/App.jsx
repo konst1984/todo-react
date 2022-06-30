@@ -123,8 +123,9 @@ export default class App extends React.Component {
   };
 
   updateTimeItem = (items) => {
-    items.forEach((item) => (item.time = formatDistanceToNowStrict(new Date(item.timeAgo))));
-    return items;
+    return items.map((item) => {
+      return { ...item, time: formatDistanceToNowStrict(new Date(item.timeAgo)) };
+    });
   };
 
   render() {
