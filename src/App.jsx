@@ -104,7 +104,7 @@ export default class App extends React.Component {
   };
 
   changeTask = (e, text, id) => {
-    // if (e.code === 13 && e.target.value.trim()) {
+
     const oldItem = this.state.todoData.find((item) => item.id === id);
 
     const newTask = {
@@ -126,7 +126,6 @@ export default class App extends React.Component {
         todoData: newArrayTask,
       };
     });
-    // }
   };
 
   updateTimeItem = (items) => {
