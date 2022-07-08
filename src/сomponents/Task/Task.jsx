@@ -1,5 +1,5 @@
 import React from 'react';
-import './task.css';
+import './Task.css';
 import PropTypes from 'prop-types';
 
 import NewTaskForm from '../NewTaskForm';
@@ -45,8 +45,8 @@ export default class Task extends React.Component {
     return (
       <li className={className}>
         <div className="view">
-          <input className="toggle" type="checkbox" onChange={onToggleDone} checked={check} />
-          <label>
+          <input id={`${id}`} className="toggle" type="checkbox" onChange={onToggleDone} checked={check} />
+          <label htmlFor={`${id}`}>
             <span className="description">{describe}</span>
             <span className="created">created {time} ago</span>
           </label>

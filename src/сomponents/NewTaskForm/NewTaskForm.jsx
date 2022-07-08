@@ -1,6 +1,7 @@
 import React from 'react';
-import './new-task-form.css';
+import './NewTaskForm.css';
 import PropTypes from 'prop-types';
+// import { formatDistanceToNowStrict } from 'date-fns';
 
 export default class NewTaskForm extends React.Component {
   static defaultProps = {
@@ -17,31 +18,27 @@ export default class NewTaskForm extends React.Component {
   };
 
   onDescribeChange = (e) => {
+    if (e.code === 'Enter' && e.target.value.trim()) {
+      this.props.changeTask(e, e.target.value, this.props.id);
+    }
     this.setState({
       describe: e.target.value,
     });
   };
 
-  // onEnterClick = (e) => {
-  //   if(e.keyCode === 13 && e.target.value.trim()) {
-  //     this.setState({
-  //       describe: ''
-  //     })
-  //   }
-  // }
-
   render() {
-    const { changeTask, id } = this.props;
-
     return (
-      <input
-        type="text"
-        className="edit"
-        autoFocus
-        value={this.state.describe}
-        onKeyUp={(e) => changeTask(e, this.state.describe, id)}
-        onChange={this.onDescribeChange}
-      />
+      <>
+        <input
+          id="input"
+          type="text"
+          className="edit"
+          autoFocus
+          onKeyDown={(e) => {
+            this.onDescribeChange(e);
+          }}
+        />
+      </>
     );
   }
 }

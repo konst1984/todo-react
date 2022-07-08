@@ -2,29 +2,28 @@ import './App.css';
 import React from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import Main from './Components/Main';
+import Header from './сomponents/Header';
+import Footer from './сomponents/Footer';
+import Main from './сomponents/Main';
 
 export default class App extends React.Component {
   maxId = 100;
-
-  dateTime = new Date();
+  date = new Date();
 
   state = {
     todoData: [],
     filter: 'all',
   };
 
-  createTodoTask(describe, timer = '0') {
+  createTodoTask(describe) {
     return {
       id: this.maxId++,
       describe,
       done: false,
       checked: false,
       edit: false,
-      time: timer,
-      timeAgo: new Date(),
+      creationTime: new Date(),
+      time: formatDistanceToNowStrict(new Date()),
     };
   }
 
@@ -77,6 +76,19 @@ export default class App extends React.Component {
     });
   };
 
+  addTask = (e, text) => {
+    if (e.keyCode === 13 && e.target.value.trim()) {
+      const newTask = this.createTodoTask(text);
+
+      this.setState(({ todoData }) => {
+        const newArrayTask = [...todoData, newTask];
+        return {
+          todoData: newArrayTask,
+        };
+      });
+    }
+  };
+
   onEdit = (id) => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex((el) => el.id === id);
@@ -91,40 +103,35 @@ export default class App extends React.Component {
     });
   };
 
-  addTask = (e, text) => {
-    if (e.keyCode === 13 && e.target.value.trim()) {
-      const timer = formatDistanceToNowStrict(new Date());
-
-      const newTask = this.createTodoTask(text, timer);
-
-      this.setState(({ todoData }) => {
-        const newArrayTask = [...todoData, newTask];
-        return {
-          todoData: newArrayTask,
-        };
-      });
-    }
-  };
-
   changeTask = (e, text, id) => {
-    if (e.keyCode === 13 && e.target.value.trim()) {
-      const timer = formatDistanceToNowStrict(new Date(this.dateTime));
+    // if (e.code === 13 && e.target.value.trim()) {
+    const oldItem = this.state.todoData.find((item) => item.id === id);
 
-      const newTask = this.createTodoTask(text, timer);
+    const newTask = {
+      id: id,
+      describe: text,
+      done: false,
+      checked: false,
+      edit: false,
+      creationTime: oldItem.creationTime,
+      time: formatDistanceToNowStrict(new Date(oldItem.creationTime)),
+      timeAgo: null,
+    };
 
-      this.setState(({ todoData }) => {
-        const idx = todoData.findIndex((item) => item.id === id);
-        const newArrayTask = [...todoData.slice(0, idx), newTask, ...todoData.slice(idx + 1)];
-        return {
-          todoData: newArrayTask,
-        };
-      });
-    }
+    this.setState(({ todoData }) => {
+      const idx = todoData.findIndex((item) => item.id === id);
+      const newArrayTask = [...todoData.slice(0, idx), newTask, ...todoData.slice(idx + 1)];
+
+      return {
+        todoData: newArrayTask,
+      };
+    });
+    // }
   };
 
   updateTimeItem = (items) => {
     return items.map((item) => {
-      return { ...item, time: formatDistanceToNowStrict(new Date(item.timeAgo)) };
+      return { ...item, time: formatDistanceToNowStrict(new Date(item.creationTime)) };
     });
   };
 

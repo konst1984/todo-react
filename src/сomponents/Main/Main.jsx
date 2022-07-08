@@ -1,5 +1,5 @@
 import React from 'react';
-import './main.css';
+import './Main.css';
 import PropTypes from 'prop-types';
 
 import TaskList from '../TaskList';
