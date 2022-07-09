@@ -47,8 +47,14 @@ export default class Task extends React.Component {
         <div className="view">
           <input id={`${id}`} className="toggle" type="checkbox" onChange={onToggleDone} checked={check} />
           <label htmlFor={`${id}`}>
-            <span className="description">{describe}</span>
-            <span className="created">created {time} ago</span>
+            <span className="title">{describe}</span>
+            {/*<span className="description">{describe}</span>*/}
+            <span className="description">
+              <button className="icon icon-play"></button>
+              <button className="icon icon-pause"></button>
+              12:25
+            </span>
+            <span className="description">created {time} ago</span>
           </label>
           <button className="icon icon-edit" onClick={onEdit} />
           <button className="icon icon-destroy" onClick={onDeleted} />

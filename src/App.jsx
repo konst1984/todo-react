@@ -104,7 +104,6 @@ export default class App extends React.Component {
   };
 
   changeTask = (e, text, id) => {
-
     const oldItem = this.state.todoData.find((item) => item.id === id);
 
     const newTask = {
@@ -115,7 +114,6 @@ export default class App extends React.Component {
       edit: false,
       creationTime: oldItem.creationTime,
       time: formatDistanceToNowStrict(new Date(oldItem.creationTime)),
-      timeAgo: null,
     };
 
     this.setState(({ todoData }) => {

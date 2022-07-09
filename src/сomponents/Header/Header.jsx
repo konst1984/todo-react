@@ -36,14 +36,18 @@ export default class Header extends React.Component {
     return (
       <header className="header" onKeyUp={this.onEnterClick}>
         <h1>{title}</h1>
-        <input
-          className="new-todo"
-          placeholder="What needs to be done?"
-          value={this.state.describe}
-          autoFocus
-          onKeyUp={(e) => onAddedTask(e, this.state.describe)}
-          onChange={this.onDescribeChange}
-        />
+        <form className="new-todo-form">
+          <input
+            className="new-todo"
+            placeholder="What needs to be done?"
+            value={this.state.describe}
+            autoFocus
+            onKeyUp={(e) => onAddedTask(e, this.state.describe)}
+            onChange={this.onDescribeChange}
+          />
+          <input className="new-todo-form__timer" placeholder="Min" autoFocus />
+          <input className="new-todo-form__timer" placeholder="Sec" autoFocus />
+        </form>
       </header>
     );
   }
