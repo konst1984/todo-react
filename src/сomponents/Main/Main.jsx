@@ -10,6 +10,8 @@ export default class Main extends React.Component {
     onEdit: () => {},
     onToggleDone: () => {},
     changeTask: () => {},
+    startTimer: () => {},
+    pauseTimer: () => {},
   };
 
   static propTypes = {
@@ -21,7 +23,7 @@ export default class Main extends React.Component {
   };
 
   render() {
-    const { todos, onDeleted, onEdit, onToggleDone, changeTask } = this.props;
+    const { todos, onDeleted, onEdit, onToggleDone, changeTask, startTimer, pauseTimer } = this.props;
 
     return (
       <section className="main">
@@ -31,6 +33,8 @@ export default class Main extends React.Component {
           onEdit={onEdit}
           onToggleDone={onToggleDone}
           changeTask={changeTask}
+          startTimer={startTimer}
+          pauseTimer={pauseTimer}
         />
       </section>
     );

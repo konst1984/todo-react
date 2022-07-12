@@ -15,6 +15,28 @@ export default class App extends React.Component {
     filter: 'all',
   };
 
+  componentDidMount() {
+    const todoData = JSON.parse(localStorage.getItem('todoData'));
+    const filter = JSON.parse(localStorage.getItem('filter'));
+    this.maxId = this.maxId !== 0 ? Number(localStorage.getItem('id')) : 1;
+    if (todoData) {
+      this.setState(() => ({
+        todoData,
+        filter,
+      }));
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('todoData', JSON.stringify(this.state.todoData));
+    localStorage.setItem('id', String(this.maxId));
+    localStorage.setItem('filter', JSON.stringify(this.state.filter));
+  }
+  //
+  // componentWillUnmount() {
+  //   clearInterval(this.timer)
+  // }
+
   createTodoTask(describe) {
     return {
       id: this.maxId++,
@@ -24,6 +46,10 @@ export default class App extends React.Component {
       edit: false,
       creationTime: new Date(),
       time: formatDistanceToNowStrict(new Date()),
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      timer: null,
     };
   }
 
@@ -79,7 +105,6 @@ export default class App extends React.Component {
   addTask = (e, text) => {
     if (e.keyCode === 13 && e.target.value.trim()) {
       const newTask = this.createTodoTask(text);
-
       this.setState(({ todoData }) => {
         const newArrayTask = [...todoData, newTask];
         return {
@@ -114,6 +139,10 @@ export default class App extends React.Component {
       edit: false,
       creationTime: oldItem.creationTime,
       time: formatDistanceToNowStrict(new Date(oldItem.creationTime)),
+      hours: oldItem.hours,
+      minutes: oldItem.minutes,
+      seconds: oldItem.seconds,
+      timer: oldItem.timer,
     };
 
     this.setState(({ todoData }) => {
@@ -132,6 +161,40 @@ export default class App extends React.Component {
     });
   };
 
+  startTimer = (id) => {
+    let newTask = {
+      ...this.state.todoData.find((item) => item.id === id),
+    };
+    clearInterval(newTask.timer);
+
+    newTask.timer = setInterval(() => {
+      if (newTask.seconds < 60) {
+        newTask.seconds += 1;
+      }
+      if (newTask.seconds > 59) {
+        newTask.minutes += 1;
+        newTask.seconds = 0;
+      }
+      if (newTask.minutes > 59) {
+        newTask.hours += 1;
+        newTask.minutes = 0;
+      }
+
+      this.setState(({ todoData }) => {
+        const idx = todoData.findIndex((item) => item.id === id);
+        const newArrayTask = [...todoData.slice(0, idx), newTask, ...todoData.slice(idx + 1)];
+
+        return {
+          todoData: newArrayTask,
+        };
+      });
+    }, 1000);
+  };
+
+  pauseTimer = (id) => {
+    clearInterval(this.state.todoData.find((item) => item.id === id).timer);
+  };
+
   render() {
     const { todoData, filter } = this.state;
 
@@ -144,10 +207,12 @@ export default class App extends React.Component {
         <Header title="todos" onAddedTask={this.addTask} />
         <Main
           todos={visibleItems}
-          onDeleted={(id) => this.deleteTask(id)}
+          onDeleted={this.deleteTask}
           onEdit={this.onEdit}
           onToggleDone={this.onToggleDone}
           changeTask={this.changeTask}
+          startTimer={this.startTimer}
+          pauseTimer={this.pauseTimer}
         />
         <Footer
           activeTaskCount={doneCount}

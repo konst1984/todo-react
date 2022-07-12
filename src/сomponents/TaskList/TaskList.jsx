@@ -5,11 +5,19 @@ import PropTypes from 'prop-types';
 import Task from '../Task/Task';
 
 export default class TaskList extends React.Component {
+  // state = {
+  //   hours: 0,
+  //   minutes: 0,
+  //   seconds: 0,
+  // };
+
   static defaultProps = {
     onDeleted: () => {},
     onEdit: () => {},
     onToggleDone: () => {},
     changeTask: () => {},
+    startTimer: () => {},
+    pauseTimer: () => {},
   };
 
   static propTypes = {
@@ -18,10 +26,12 @@ export default class TaskList extends React.Component {
     onEdit: PropTypes.func,
     onToggleDone: PropTypes.func,
     changeTask: PropTypes.func,
+    startTimer: PropTypes.func,
+    pauseTimer: PropTypes.func,
   };
 
   render() {
-    const { todoData, onDeleted, onEdit, onToggleDone, changeTask } = this.props;
+    const { todoData, onDeleted, onEdit, onToggleDone, changeTask, startTimer, pauseTimer } = this.props;
 
     const elements = todoData.map((item) => {
       const { id, nameClass, ...itemProps } = item;
@@ -31,10 +41,16 @@ export default class TaskList extends React.Component {
           className={nameClass}
           {...itemProps}
           id={id}
+          todoData={todoData}
           onDeleted={() => onDeleted(id)}
           onEdit={() => onEdit(id)}
           onToggleDone={() => onToggleDone(id)}
           changeTask={changeTask}
+          hours={item.hours}
+          minutes={item.minutes}
+          seconds={item.seconds}
+          startTimer={() => startTimer(id)}
+          pauseTimer={() => pauseTimer(id)}
         />
       );
     });
