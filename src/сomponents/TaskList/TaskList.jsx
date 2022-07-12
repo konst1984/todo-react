@@ -5,11 +5,6 @@ import PropTypes from 'prop-types';
 import Task from '../Task/Task';
 
 export default class TaskList extends React.Component {
-  // state = {
-  //   hours: 0,
-  //   minutes: 0,
-  //   seconds: 0,
-  // };
 
   static defaultProps = {
     onDeleted: () => {},

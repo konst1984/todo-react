@@ -20,6 +20,8 @@ export default class Main extends React.Component {
     onEdit: PropTypes.func,
     onToggleDone: PropTypes.func,
     changeTask: PropTypes.func,
+    startTimer: PropTypes.func,
+    pauseTimer: PropTypes.func,
   };
 
   render() {

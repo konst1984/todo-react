@@ -32,10 +32,6 @@ export default class App extends React.Component {
     localStorage.setItem('id', String(this.maxId));
     localStorage.setItem('filter', JSON.stringify(this.state.filter));
   }
-  //
-  // componentWillUnmount() {
-  //   clearInterval(this.timer)
-  // }
 
   createTodoTask(describe) {
     return {
