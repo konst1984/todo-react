@@ -1,8 +1,10 @@
+// eslint-disable-next-line import/order
 import React from 'react';
 import './Task.css';
-import PropTypes from 'prop-types';
-import Timer from '../Timer';
 
+import PropTypes from 'prop-types';
+
+import Timer from '../Timer';
 import NewTaskForm from '../NewTaskForm';
 
 export default class Task extends React.Component {
