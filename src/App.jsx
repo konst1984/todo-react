@@ -42,8 +42,8 @@ export default class App extends React.Component {
       edit: false,
       creationTime: new Date(),
       time: formatDistanceToNowStrict(new Date()),
-      minutes: Number(min),
-      seconds: Number(sec),
+      minutes: min,
+      seconds: sec,
       timer: null,
     };
   }

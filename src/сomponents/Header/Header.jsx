@@ -15,8 +15,8 @@ export default class Header extends React.Component {
 
   state = {
     describe: '',
-    min: '',
-    sec: '',
+    min: '00',
+    sec: '00',
   };
 
   onDescribeChange = (e) => {
@@ -29,8 +29,8 @@ export default class Header extends React.Component {
     if (e.keyCode === 13 && e.target.value.trim()) {
       this.setState({
         describe: '',
-        min: '',
-        sec: '',
+        min: '00',
+        sec: '00',
       });
     }
   };
