@@ -12,28 +12,25 @@ export default class Timer extends React.Component {
   };
 
   static propTypes = {
-    hours: PropTypes.number,
     minutes: PropTypes.number,
     seconds: PropTypes.number,
     startTimer: PropTypes.func,
     pauseTimer: PropTypes.func,
   };
 
-  transformTimer = (item, item2, item3) => {
-    if (item !== undefined) {
-      return `${item.toString().padStart(2, '0')}:${item2.toString().padStart(2, '0')}:${item3
-        .toString()
-        .padStart(2, '0')}`;
+  transformTimer = (item1, item2) => {
+    if (item1 !== undefined) {
+      return `${item1.toString().padStart(2, '0')}:${item2.toString().padStart(2, '0')}`;
     } else return '0';
   };
 
   render() {
-    const { hours, minutes, seconds, startTimer, pauseTimer } = this.props;
+    const { minutes, seconds, startTimer, pauseTimer } = this.props;
     return (
       <span className="description">
         <button className="icon icon-play" onClick={startTimer}></button>
         <button className="icon icon-pause" onClick={pauseTimer}></button>
-        {this.transformTimer(hours, minutes, seconds)}
+        {this.transformTimer(minutes, seconds)}
       </span>
     );
   }

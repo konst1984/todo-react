@@ -33,7 +33,7 @@ export default class App extends React.Component {
     localStorage.setItem('filter', JSON.stringify(this.state.filter));
   }
 
-  createTodoTask(describe) {
+  createTodoTask(describe, min, sec) {
     return {
       id: this.maxId++,
       describe,
@@ -42,9 +42,8 @@ export default class App extends React.Component {
       edit: false,
       creationTime: new Date(),
       time: formatDistanceToNowStrict(new Date()),
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
+      minutes: Number(min),
+      seconds: Number(sec),
       timer: null,
     };
   }
@@ -98,9 +97,9 @@ export default class App extends React.Component {
     });
   };
 
-  addTask = (e, text) => {
-    if (e.keyCode === 13 && e.target.value.trim()) {
-      const newTask = this.createTodoTask(text);
+  addTask = (e, text, min, sec) => {
+    if (e.keyCode === 13 && e.target.value.trim() && text && min && sec) {
+      const newTask = this.createTodoTask(text, min, sec);
       this.setState(({ todoData }) => {
         const newArrayTask = [...todoData, newTask];
         return {
@@ -135,7 +134,6 @@ export default class App extends React.Component {
       edit: false,
       creationTime: oldItem.creationTime,
       time: formatDistanceToNowStrict(new Date(oldItem.creationTime)),
-      hours: oldItem.hours,
       minutes: oldItem.minutes,
       seconds: oldItem.seconds,
       timer: oldItem.timer,
@@ -164,16 +162,17 @@ export default class App extends React.Component {
     clearInterval(newTask.timer);
 
     newTask.timer = setInterval(() => {
-      if (newTask.seconds < 60) {
-        newTask.seconds += 1;
+      if (newTask.seconds >= 1) {
+        newTask.seconds -= 1;
       }
-      if (newTask.seconds > 59) {
-        newTask.minutes += 1;
-        newTask.seconds = 0;
+      if (newTask.seconds < 1) {
+        newTask.minutes -= 1;
+        newTask.seconds = 59;
       }
-      if (newTask.minutes > 59) {
-        newTask.hours += 1;
+      if (newTask.minutes < 0) {
         newTask.minutes = 0;
+        newTask.seconds = 0;
+        clearInterval(this.state.todoData.find((item) => item.id === id).timer);
       }
 
       this.setState(({ todoData }) => {

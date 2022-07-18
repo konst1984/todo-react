@@ -32,7 +32,6 @@ export default class Task extends React.Component {
     edit: PropTypes.bool,
     checked: PropTypes.bool,
     id: PropTypes.number.isRequired,
-    hours: PropTypes.number,
     minutes: PropTypes.number,
     seconds: PropTypes.number,
     startTimer: PropTypes.func,
@@ -51,7 +50,6 @@ export default class Task extends React.Component {
       edit,
       changeTask,
       id,
-      hours,
       minutes,
       seconds,
       startTimer,
@@ -74,7 +72,7 @@ export default class Task extends React.Component {
           <input id={`${id}`} className="toggle" type="checkbox" onChange={onToggleDone} checked={check} />
           <label htmlFor={`${id}`}>
             <span className="title">{describe}</span>
-            <Timer startTimer={startTimer} pauseTimer={pauseTimer} hours={hours} minutes={minutes} seconds={seconds} />
+            <Timer startTimer={startTimer} pauseTimer={pauseTimer} minutes={minutes} seconds={seconds} />
             <span className="description">created {time} ago</span>
           </label>
           <button className="icon icon-edit" onClick={onEdit} />

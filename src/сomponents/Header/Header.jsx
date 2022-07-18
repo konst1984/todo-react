@@ -15,6 +15,8 @@ export default class Header extends React.Component {
 
   state = {
     describe: '',
+    min: '',
+    sec: '',
   };
 
   onDescribeChange = (e) => {
@@ -27,12 +29,19 @@ export default class Header extends React.Component {
     if (e.keyCode === 13 && e.target.value.trim()) {
       this.setState({
         describe: '',
+        min: '',
+        sec: '',
       });
     }
   };
 
+  onSetTime = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
     const { title, onAddedTask } = this.props;
+    const { describe, min, sec } = this.state;
     return (
       <header className="header" onKeyUp={this.onEnterClick}>
         <h1>{title}</h1>
@@ -40,13 +49,29 @@ export default class Header extends React.Component {
           <input
             className="new-todo"
             placeholder="What needs to be done?"
-            value={this.state.describe}
+            value={describe}
             autoFocus
-            onKeyUp={(e) => onAddedTask(e, this.state.describe)}
+            onKeyUp={(e) => onAddedTask(e, describe, min, sec)}
             onChange={this.onDescribeChange}
           />
-          <input className="new-todo-form__timer" placeholder="Min" autoFocus />
-          <input className="new-todo-form__timer" placeholder="Sec" autoFocus />
+          <input
+            className="new-todo-form__timer"
+            placeholder="Min"
+            autoFocus
+            name="min"
+            value={min}
+            onChange={this.onSetTime}
+            onKeyUp={(e) => onAddedTask(e, describe, min, sec)}
+          />
+          <input
+            className="new-todo-form__timer"
+            placeholder="Sec"
+            autoFocus
+            name="sec"
+            value={sec}
+            onChange={this.onSetTime}
+            onKeyUp={(e) => onAddedTask(e, describe, min, sec)}
+          />
         </form>
       </header>
     );

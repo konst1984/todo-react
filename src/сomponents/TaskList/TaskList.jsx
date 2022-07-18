@@ -40,7 +40,6 @@ export default class TaskList extends React.Component {
           onEdit={() => onEdit(id)}
           onToggleDone={() => onToggleDone(id)}
           changeTask={changeTask}
-          hours={item.hours}
           minutes={item.minutes}
           seconds={item.seconds}
           startTimer={() => startTimer(id)}
