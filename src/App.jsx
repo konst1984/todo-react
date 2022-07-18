@@ -8,7 +8,6 @@ import Main from './сomponents/Main';
 
 export default class App extends React.Component {
   maxId = 100;
-  date = new Date();
 
   state = {
     todoData: [],
