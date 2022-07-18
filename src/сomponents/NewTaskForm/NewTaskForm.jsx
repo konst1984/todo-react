@@ -1,7 +1,6 @@
 import React from 'react';
 import './NewTaskForm.css';
 import PropTypes from 'prop-types';
-// import { formatDistanceToNowStrict } from 'date-fns';
 
 export default class NewTaskForm extends React.Component {
   static defaultProps = {
