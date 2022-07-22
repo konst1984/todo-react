@@ -55,7 +55,6 @@ export default class Task extends React.Component {
       startTimer,
       pauseTimer,
     } = this.props;
-
     let className = '';
 
     if (done) {

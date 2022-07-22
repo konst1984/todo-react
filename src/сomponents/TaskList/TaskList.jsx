@@ -29,6 +29,7 @@ export default class TaskList extends React.Component {
 
     const elements = todoData.map((item) => {
       const { id, nameClass, ...itemProps } = item;
+
       return (
         <Task
           key={id}
@@ -40,8 +41,8 @@ export default class TaskList extends React.Component {
           onEdit={() => onEdit(id)}
           onToggleDone={() => onToggleDone(id)}
           changeTask={changeTask}
-          minutes={item.minutes}
-          seconds={item.seconds}
+          minutes={+item.minutes}
+          seconds={+item.seconds}
           startTimer={() => startTimer(id)}
           pauseTimer={() => pauseTimer(id)}
         />

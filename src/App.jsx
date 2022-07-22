@@ -97,7 +97,7 @@ export default class App extends React.Component {
   };
 
   addTask = (e, text, min, sec) => {
-    if (e.keyCode === 13 && e.target.value.trim() && text && min && sec) {
+    if (e.keyCode === 13 && e.target.value.trim() && text && (min || sec)) {
       const newTask = this.createTodoTask(text, min, sec);
       this.setState(({ todoData }) => {
         const newArrayTask = [...todoData, newTask];

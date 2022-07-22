@@ -15,8 +15,8 @@ export default class Header extends React.Component {
 
   state = {
     describe: '',
-    min: '00',
-    sec: '00',
+    min: '',
+    sec: '',
   };
 
   onDescribeChange = (e) => {
@@ -29,14 +29,16 @@ export default class Header extends React.Component {
     if (e.keyCode === 13 && e.target.value.trim()) {
       this.setState({
         describe: '',
-        min: '00',
-        sec: '00',
+        min: '',
+        sec: '',
       });
     }
   };
 
   onSetTime = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    // this.setState({ [e.target.name]: e.target.value });
+    let regex = /[A-Za-zA-Яа-яЁё]/g;
+    this.setState({ [e.target.name]: e.target.value.replace(regex, '') });
   };
 
   render() {
@@ -56,18 +58,20 @@ export default class Header extends React.Component {
           />
           <input
             className="new-todo-form__timer"
-            placeholder="Min"
+            placeholder="00"
             autoFocus
             name="min"
+            maxLength="2"
             value={min}
             onChange={this.onSetTime}
             onKeyUp={(e) => onAddedTask(e, describe, min, sec)}
           />
           <input
             className="new-todo-form__timer"
-            placeholder="Sec"
+            placeholder="00"
             autoFocus
             name="sec"
+            maxLength="2"
             value={sec}
             onChange={this.onSetTime}
             onKeyUp={(e) => onAddedTask(e, describe, min, sec)}

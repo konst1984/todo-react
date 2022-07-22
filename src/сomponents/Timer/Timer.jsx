@@ -21,7 +21,7 @@ export default class Timer extends React.Component {
   transformTimer = (item1, item2) => {
     if (item1 !== undefined) {
       return `${item1.toString().padStart(2, '0')}:${item2.toString().padStart(2, '0')}`;
-    } else return '0';
+    } else return 0;
   };
 
   render() {
