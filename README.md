@@ -1,2 +1,2 @@
 # my todo project on react
-https://todo-react-ecru-ten.vercel.app/
+# LINK: https://my-todo-maket-pk4yyd7ri-konst1984.vercel.app/
