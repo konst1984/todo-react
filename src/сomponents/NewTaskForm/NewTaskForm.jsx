@@ -33,6 +33,7 @@ export default class NewTaskForm extends React.Component {
           type="text"
           className="edit"
           autoFocus
+          defaultValue={this.state.describe}
           onKeyDown={(e) => {
             this.onDescribeChange(e);
           }}
