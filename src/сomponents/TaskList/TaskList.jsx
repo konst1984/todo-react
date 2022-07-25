@@ -4,28 +4,7 @@ import PropTypes from 'prop-types';
 
 import Task from '../Task/Task';
 
-export default class TaskList extends React.Component {
-  static defaultProps = {
-    onDeleted: () => {},
-    onEdit: () => {},
-    onToggleDone: () => {},
-    changeTask: () => {},
-    startTimer: () => {},
-    pauseTimer: () => {},
-  };
-
-  static propTypes = {
-    todoData: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onDeleted: PropTypes.func,
-    onEdit: PropTypes.func,
-    onToggleDone: PropTypes.func,
-    changeTask: PropTypes.func,
-    startTimer: PropTypes.func,
-    pauseTimer: PropTypes.func,
-  };
-
-  render() {
-    const { todoData, onDeleted, onEdit, onToggleDone, changeTask, startTimer, pauseTimer } = this.props;
+const TaskList = ({ todoData, onDeleted, onEdit, onToggleDone, changeTask, startTimer, pauseTimer }) => {
 
     const elements = todoData.map((item) => {
       const { id, nameClass, ...itemProps } = item;
@@ -50,5 +29,26 @@ export default class TaskList extends React.Component {
     });
 
     return <ul className="todo-list">{elements}</ul>;
-  }
+
 }
+
+TaskList.defaultProps = {
+  onDeleted: () => {},
+  onEdit: () => {},
+  onToggleDone: () => {},
+  changeTask: () => {},
+  startTimer: () => {},
+  pauseTimer: () => {},
+};
+
+TaskList.propTypes = {
+  todoData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onDeleted: PropTypes.func,
+  onEdit: PropTypes.func,
+  onToggleDone: PropTypes.func,
+  changeTask: PropTypes.func,
+  startTimer: PropTypes.func,
+  pauseTimer: PropTypes.func,
+};
+
+export default TaskList;

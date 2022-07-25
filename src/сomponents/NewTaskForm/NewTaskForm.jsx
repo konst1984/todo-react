@@ -1,44 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NewTaskForm.css';
 import PropTypes from 'prop-types';
 
-export default class NewTaskForm extends React.Component {
-  static defaultProps = {
-    changeTask: () => {},
-  };
+const NewTaskForm = ({ describe, id, changeTask }) => {
+  const [todoName, setTodoName] = useState(describe);
 
-  static propTypes = {
-    changeTask: PropTypes.func,
-    id: PropTypes.number.isRequired,
-  };
-
-  state = {
-    describe: this.props.describe,
-  };
-
-  onDescribeChange = (e) => {
+  const onDescribeChange = (e) => {
     if (e.code === 'Enter' && e.target.value.trim()) {
-      this.props.changeTask(e, e.target.value, this.props.id);
+      changeTask(e, e.target.value, id);
     }
     this.setState({
       describe: e.target.value,
     });
   };
 
-  render() {
-    return (
-      <>
-        <input
-          id="input"
-          type="text"
-          className="edit"
-          autoFocus
-          defaultValue={this.state.describe}
-          onKeyDown={(e) => {
-            this.onDescribeChange(e);
-          }}
-        />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <input
+        id="input"
+        type="text"
+        className="edit"
+        autoFocus
+        defaultValue={todoName}
+        onKeyDown={(e) => {
+          onDescribeChange(e);
+        }}
+      />
+    </>
+  );
+};
+
+NewTaskForm.defaultProps = {
+  changeTask: () => {},
+};
+NewTaskForm.propTypes = {
+  changeTask: PropTypes.func,
+  id: PropTypes.number.isRequired,
+  describe: PropTypes.string,
+};
+
+export default NewTaskForm;

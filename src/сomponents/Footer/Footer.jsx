@@ -4,32 +4,30 @@ import PropTypes from 'prop-types';
 import TaskFilter from '../TasksFilter';
 import './Footer.css';
 
-export default class Footer extends React.Component {
-  static defaultProps = {
-    activeTaskCount: 0,
-    onFilterChange: () => {},
-    onClearCompleted: () => {},
-  };
+const Footer = ({ activeTaskCount, onFilterChange, onClearCompleted }) => {
+  return (
+    <footer className="footer">
+      <span className="todo-count">{activeTaskCount} items left</span>
+      <ul className="filters">
+        <TaskFilter onFilterChange={onFilterChange} />
+      </ul>
+      <button className="clear-completed" onClick={onClearCompleted}>
+        Clear completed
+      </button>
+    </footer>
+  );
+};
 
-  static propTypes = {
-    activeTaskCount: PropTypes.number,
-    onFilterChange: PropTypes.func,
-    onClearCompleted: PropTypes.func,
-  };
+Footer.defaultProps = {
+  activeTaskCount: 0,
+  onFilterChange: () => {},
+  onClearCompleted: () => {},
+};
 
-  render() {
-    const { activeTaskCount, onFilterChange, onClearCompleted } = this.props;
+Footer.propTypes = {
+  activeTaskCount: PropTypes.number,
+  onFilterChange: PropTypes.func,
+  onClearCompleted: PropTypes.func,
+};
 
-    return (
-      <footer className="footer">
-        <span className="todo-count">{activeTaskCount} items left</span>
-        <ul className="filters">
-          <TaskFilter onFilterChange={onFilterChange} />
-        </ul>
-        <button className="clear-completed" onClick={onClearCompleted}>
-          Clear completed
-        </button>
-      </footer>
-    );
-  }
-}
+export default Footer;
