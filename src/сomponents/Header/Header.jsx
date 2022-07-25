@@ -36,7 +36,6 @@ export default class Header extends React.Component {
   };
 
   onSetTime = (e) => {
-    // this.setState({ [e.target.name]: e.target.value });
     let regex = /[A-Za-zA-Яа-яЁё]/g;
     this.setState({ [e.target.name]: e.target.value.replace(regex, '') });
   };
