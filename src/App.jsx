@@ -51,7 +51,7 @@ const App = () => {
   const filter = (items, name) => {
     switch (name) {
       case 'all':
-        console.log(items)
+        console.log(items);
         return items;
       case 'active':
         return items.filter((item) => !item.done);
@@ -70,7 +70,6 @@ const App = () => {
     const newArray = items.filter((item) => !item.done);
     setTodoData(newArray);
   };
-
 
   const addTask = (e, text, min, sec) => {
     if (e.keyCode === 13 && e.target.value.trim() && text && (min || sec)) {
@@ -153,7 +152,7 @@ const App = () => {
   const doneCount = todoData.filter((item) => !item.done).length;
 
   const visibleItems = updateTimeItem(filter(todoData, currentFilter));
-  console.log(visibleItems)
+  console.log(visibleItems);
 
   return (
     <div className="todoapp">

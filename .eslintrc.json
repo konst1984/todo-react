@@ -50,7 +50,10 @@
           "newlines-between": "always"
         }
       ],
-      "react/static-property-placement": ["error", "static public field"]
+      "react/static-property-placement": ["error", "static public field"],
+      "no-unused-vars": "off",
+      "react/jsx-uses-react": "error",
+      "react/jsx-uses-vars": "error"
     },
     "settings": {
       "import/resolver": {

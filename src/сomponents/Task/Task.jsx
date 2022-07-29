@@ -8,21 +8,21 @@ import Timer from '../Timer';
 import NewTaskForm from '../NewTaskForm';
 
 const Task = ({
-                describe,
-                onDeleted,
-                time,
-                onEdit,
-                onToggleDone,
-                done,
-                checked,
-                edit,
-                changeTask,
-                id,
-                minutes,
-                seconds,
-                startTimer,
-                pauseTimer,
-              }) => {
+  describe,
+  onDeleted,
+  time,
+  onEdit,
+  onToggleDone,
+  done,
+  checked,
+  edit,
+  changeTask,
+  id,
+  minutes,
+  seconds,
+  startTimer,
+  pauseTimer,
+}) => {
   let className = '';
 
   if (done) {
@@ -80,4 +80,3 @@ Task.propTypes = {
   pauseTimer: PropTypes.func,
 };
 export default Task;
-

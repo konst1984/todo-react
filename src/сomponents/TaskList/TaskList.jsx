@@ -5,32 +5,30 @@ import PropTypes from 'prop-types';
 import Task from '../Task/Task';
 
 const TaskList = ({ todoData, onDeleted, onEdit, onToggleDone, changeTask, startTimer, pauseTimer }) => {
+  const elements = todoData.map((item) => {
+    const { id, nameClass, ...itemProps } = item;
 
-    const elements = todoData.map((item) => {
-      const { id, nameClass, ...itemProps } = item;
+    return (
+      <Task
+        key={id}
+        className={nameClass}
+        {...itemProps}
+        id={id}
+        todoData={todoData}
+        onDeleted={() => onDeleted(id)}
+        onEdit={() => onEdit(id)}
+        onToggleDone={() => onToggleDone(id)}
+        changeTask={changeTask}
+        minutes={+item.minutes}
+        seconds={+item.seconds}
+        startTimer={() => startTimer(id)}
+        pauseTimer={() => pauseTimer(id)}
+      />
+    );
+  });
 
-      return (
-        <Task
-          key={id}
-          className={nameClass}
-          {...itemProps}
-          id={id}
-          todoData={todoData}
-          onDeleted={() => onDeleted(id)}
-          onEdit={() => onEdit(id)}
-          onToggleDone={() => onToggleDone(id)}
-          changeTask={changeTask}
-          minutes={+item.minutes}
-          seconds={+item.seconds}
-          startTimer={() => startTimer(id)}
-          pauseTimer={() => pauseTimer(id)}
-        />
-      );
-    });
-
-    return <ul className="todo-list">{elements}</ul>;
-
-}
+  return <ul className="todo-list">{elements}</ul>;
+};
 
 TaskList.defaultProps = {
   onDeleted: () => {},
